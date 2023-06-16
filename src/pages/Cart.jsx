@@ -1,10 +1,50 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable jsx-a11y/img-redundant-alt */
-import React from 'react'
+import React, { useState } from 'react'
 import Layout from '../components/Layout'
 import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { removeItem,incrementQuantity } from '../store/cartSlice';
+import 'react-toastify/dist/ReactToastify.css';
+import { TOAST_CONFIG } from '../contants/custom';
+import { toast } from 'react-toastify';
+import { Link } from 'react-router-dom';
 
 const Cart = () => {
+    const dispatch = useDispatch()
+    const cart = useSelector((state) => state.cart)
+    const handleRemove = (id) => {
+        dispatch(
+            removeItem({
+                id
+            })
+        );
+        toast.success('Product Removed From Whishlist', TOAST_CONFIG)
+    }
+    const [quantity, setQuantity] = useState(1);
+
+    const handleDecrement = () => {
+        if (quantity > 1) {
+            setQuantity(quantity - 1);
+        }
+    };
+
+    const handleIncrement = (id) => {
+        dispatch(
+            incrementQuantity({
+                id
+            })
+        );
+        setQuantity(quantity + 1);
+    };
+    const getTotal = () => {
+        let totalPrice = 0;
+        cart.cart.forEach((item) => {
+            totalPrice += item.price * item.quantity;
+        });
+        return { totalPrice };
+    };
+    const { totalPrice } = getTotal();
 
     return (
         <Layout>
@@ -37,36 +77,30 @@ const Cart = () => {
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td className="li-product-remove"><a href="#"><i className="fa fa-times"></i></a></td>
-                                                <td className="li-product-thumbnail"><a href="#"><img src="images/product/small-size/5.jpg" alt="Li's Product Image" /></a></td>
-                                                <td className="li-product-name"><a href="#">Accusantium dolorem1</a></td>
-                                                <td className="li-product-price"><span className="amount">$46.80</span></td>
-                                                <td className="quantity">
-                                                    <label>Quantity</label>
-                                                    <div className="cart-plus-minus">
-                                                        <input className="cart-plus-minus-box" value="1" type="text" />
-                                                        <div className="dec qtybutton"><i className="fa fa-angle-down"></i></div>
-                                                        <div className="inc qtybutton"><i className="fa fa-angle-up"></i></div>
-                                                    </div>
-                                                </td>
-                                                <td className="product-subtotal"><span className="amount">$70.00</span></td>
-                                            </tr>
-                                            <tr>
-                                                <td className="li-product-remove"><a href="#"><i className="fa fa-times"></i></a></td>
-                                                <td className="li-product-thumbnail"><a href="#"><img src="images/product/small-size/6.jpg" alt="Li's Product Image" /></a></td>
-                                                <td className="li-product-name"><a href="#">Mug Today is a good day</a></td>
-                                                <td className="li-product-price"><span className="amount">$71.80</span></td>
-                                                <td className="quantity">
-                                                    <label>Quantity</label>
-                                                    <div className="cart-plus-minus">
-                                                        <input className="cart-plus-minus-box" value="1" type="text" />
-                                                        <div className="dec qtybutton"><i className="fa fa-angle-down"></i></div>
-                                                        <div className="inc qtybutton"><i className="fa fa-angle-up"></i></div>
-                                                    </div>
-                                                </td>
-                                                <td className="product-subtotal"><span className="amount">$60.50</span></td>
-                                            </tr>
+                                            {cart?.cart.map((item) => (
+                                                <tr key={item.id}>
+                                                    <td className="li-product-remove" onClick={() => handleRemove(item.id)} ><i className="fa fa-times"></i></td>
+                                                    <td className="li-product-thumbnail"><a href="#"><img src={item.image} alt="" style={{ width: '100px', height: '100px' }} /></a></td>
+                                                    <td className="li-product-name"><Link to={`/product-detail/${item.id}`}>{item.title}</Link></td>
+                                                    <td className="li-product-price"><span className="amount">$ {item.price}</span></td>
+
+                                                    <td className="quantity">
+                                                        <label>Quantity</label>
+                                                        <div className="cart-plus-minus">
+                                                            <input className="cart-plus-minus-box" value={quantity} type="text" />
+                                                            <div className="dec qtybutton" onClick={()=>handleDecrement(item.id)}>
+                                                                <i className="fa fa-angle-down"></i>
+                                                            </div>
+                                                            <div className="inc qtybutton" onClick={()=>handleIncrement(item.id)}>
+                                                                <i className="fa fa-angle-up"></i>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td className="li-product-price"><span className="amount">$ {totalPrice}</span></td>
+                                                </tr>
+                                            ))}
+
+
                                         </tbody>
                                     </table>
                                 </div>
@@ -88,8 +122,8 @@ const Cart = () => {
                                         <div className="cart-page-total">
                                             <h2>Cart totals</h2>
                                             <ul>
-                                                <li>Subtotal <span>$130.00</span></li>
-                                                <li>Total <span>$130.00</span></li>
+                                                <li>Subtotal <span>{totalPrice}</span></li>
+                                                <li>Total <span>{totalPrice}</span></li>
                                             </ul>
                                             <a href="#">Proceed to checkout</a>
                                         </div>

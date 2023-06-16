@@ -8,6 +8,7 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { TOAST_CONFIG } from '../contants/custom';
 import { removeWishItem } from '../store/wishSlice';
+import { addToCart } from '../store/cartSlice';
 
 const WishList = () => {
     const dispatch = useDispatch()
@@ -20,6 +21,18 @@ const WishList = () => {
         );
         toast.success('Product Removed From Whishlist', TOAST_CONFIG)
     }
+
+    const handleAddToCart = (item) => {
+        dispatch(
+            addToCart({
+                id: item.id,
+                title: item.title,
+                image: item.image,
+                price: item.price
+            })
+        );
+        toast.success('Product added to cart', TOAST_CONFIG);
+    };
 
     return (
         <Layout>
@@ -58,7 +71,7 @@ const WishList = () => {
                                                     <td className="li-product-thumbnail"><a href="#"><img src={item.image} alt="" style={{ width: '100px', height: '100px' }} /></a></td>
                                                     <td className="li-product-name"><Link to={`/product-detail/${item.id}`}>{item.title}</Link></td>
                                                     <td className="li-product-price"><span className="amount">$ {item.price}</span></td>
-                                                    <td className="li-product-add-cart"><a href="#">add to cart</a></td>
+                                                    <td className="li-product-add-cart" onClick={() => handleAddToCart(item)}><a href="#">add to cart</a></td>
                                                 </tr>
                                             )) : []}
 

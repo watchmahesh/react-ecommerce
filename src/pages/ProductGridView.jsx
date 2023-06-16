@@ -61,7 +61,7 @@ const ProductGridView = () => {
                     <div className="single-product-wrap">
                         <div className="product-image">
                             <Link to="/product-detail">
-                                <img src={item.image} alt="Li's Product Image" />
+                                <img src={item.image} alt="Li's Product Image" style={{ width: '100px', height: '100px' }} />
                             </Link>
                             <span className="sticker">New</span>
                         </div>

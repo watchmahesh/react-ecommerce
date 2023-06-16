@@ -4,14 +4,14 @@ import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux';
 
 const Header = () => {
-    const[category,setCategory]=useState([])
-    useEffect(()=>{
+    const [category, setCategory] = useState([])
+    useEffect(() => {
         const fetchData = async () => {
             const response = await fetch('https://fakestoreapi.com/products/categories');
             setCategory(await response.json())
         }
         fetchData()
-    },[])
+    }, [])
     // Get Data From Store.
     const cart = useSelector((state) => state.cart)
     const wish = useSelector((state) => state.wish)
@@ -21,15 +21,16 @@ const Header = () => {
         setIsSettingOpen(!isSettingOpen);
     };
     const [isDropdownOpen] = useState(false);
-    const getTotalQuantity = () => {
-        let total = 0
-        if (cart) {
-            cart.cart.forEach(item => {
-                total += item.quantity
-            })
-            return total
-        }
-    }
+    const getTotal = () => {
+        let totalQuantity = 0;
+        let totalPrice = 0;
+        cart.cart.forEach((item) => {
+            totalQuantity += item.quantity;
+            totalPrice += item.price * item.quantity;
+        });
+        return { totalPrice, totalQuantity };
+    };
+    const { totalPrice, totalQuantity } = getTotal();
     const getTotalWishListQuantity = () => {
         let total = 0
         wish.wishlist.forEach(item => {
@@ -113,52 +114,52 @@ const Header = () => {
                                             </Link>
                                         </li>
                                         <Link to="/cart">
-                                        <li className={`hm-minicart ${isDropdownOpen ? 'open' : ''}`}>
-                                            <div className="hm-minicart-trigger">
-                                                <span className="item-icon"></span>
-                                                <span className="item-text">£80.00
-                                                    <span className="cart-item-count">{getTotalQuantity() || 0}</span>
-                                                </span>
-                                            </div>
-                                            <span></span>
-                                            <div className="minicart">
-                                                <ul className="minicart-product-list">
-                                                    <li>
-                                                        <a href="single-product.html" className="minicart-product-image">
-                                                            <img src="images/product/small-size/5.jpg" alt="cart products" />
-                                                        </a>
-                                                        <div className="minicart-product-details">
-                                                            <h6><a href="single-product.html">Aenean eu tristique</a></h6>
-                                                            <span>£40 x 1</span>
-                                                        </div>
-                                                        <button className="close" title="Remove">
-                                                            <i className="fa fa-close"></i>
-                                                        </button>
-                                                    </li>
-                                                    <li>
-                                                        <a href="single-product.html" className="minicart-product-image">
-                                                            <img src="images/product/small-size/6.jpg" alt="cart products" />
-                                                        </a>
-                                                        <div className="minicart-product-details">
-                                                            <h6><a href="single-product.html">Aenean eu tristique</a></h6>
-                                                            <span>£40 x 1</span>
-                                                        </div>
-                                                        <button className="close" title="Remove">
-                                                            <i className="fa fa-close"></i>
-                                                        </button>
-                                                    </li>
-                                                </ul>
-                                                <p className="minicart-total">SUBTOTAL: <span>£80.00</span></p>
-                                                <div className="minicart-button">
-                                                    <a href="shopping-cart.html" className="li-button li-button-fullwidth li-button-dark">
-                                                        <span>View Full Cart</span>
-                                                    </a>
-                                                    <a href="checkout.html" className="li-button li-button-fullwidth">
-                                                        <span>Checkout</span>
-                                                    </a>
+                                            <li className={`hm-minicart ${isDropdownOpen ? 'open' : ''}`}>
+                                                <div className="hm-minicart-trigger">
+                                                    <span className="item-icon"></span>
+                                                    <span className="item-text">$ {totalPrice}
+                                                        <span className="cart-item-count">{totalQuantity || 0}</span>
+                                                    </span>
                                                 </div>
-                                            </div>
-                                        </li>
+                                                <span></span>
+                                                <div className="minicart">
+                                                    <ul className="minicart-product-list">
+                                                        <li>
+                                                            <a href="single-product.html" className="minicart-product-image">
+                                                                <img src="images/product/small-size/5.jpg" alt="cart products" />
+                                                            </a>
+                                                            <div className="minicart-product-details">
+                                                                <h6><a href="single-product.html">Aenean eu tristique</a></h6>
+                                                                <span>£40 x 1</span>
+                                                            </div>
+                                                            <button className="close" title="Remove">
+                                                                <i className="fa fa-close"></i>
+                                                            </button>
+                                                        </li>
+                                                        <li>
+                                                            <a href="single-product.html" className="minicart-product-image">
+                                                                <img src="images/product/small-size/6.jpg" alt="cart products" />
+                                                            </a>
+                                                            <div className="minicart-product-details">
+                                                                <h6><a href="single-product.html">Aenean eu tristique</a></h6>
+                                                                <span>£40 x 1</span>
+                                                            </div>
+                                                            <button className="close" title="Remove">
+                                                                <i className="fa fa-close"></i>
+                                                            </button>
+                                                        </li>
+                                                    </ul>
+                                                    <p className="minicart-total">SUBTOTAL: <span>£80.00</span></p>
+                                                    <div className="minicart-button">
+                                                        <a href="shopping-cart.html" className="li-button li-button-fullwidth li-button-dark">
+                                                            <span>View Full Cart</span>
+                                                        </a>
+                                                        <a href="checkout.html" className="li-button li-button-fullwidth">
+                                                            <span>Checkout</span>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </li>
                                         </Link>
 
 
@@ -179,8 +180,8 @@ const Header = () => {
                                     <nav>
                                         <ul>
                                             <li><Link to="/">Home</Link></li>
-                                          
-                                           {/* {category ?.map((item)=>(
+
+                                            {/* {category ?.map((item)=>(
                                             <li><Link to={`/product-category/${item}`}>{item}</Link></li>
                                            ))} */}
                                             <li><Link to="/product-category">Accessories</Link></li>
