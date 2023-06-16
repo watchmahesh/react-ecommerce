@@ -23,8 +23,8 @@ function App() {
           element={<Login onLogin={() => setIsSignedIn(true)} />} />
         <Route exact path="/register" element={<Register />} />
         <Route exact path="/" element={<HomePage />} />
-        {/* <Route exact path="/product-category/:category" element={<ProductByCategory />} /> */}
-        <Route exact path="/product-category" element={<ProductByCategory />} />
+        <Route exact path="/product-category/:category" element={<ProductByCategory />} />
+        {/* <Route exact path="/product-category" element={<ProductByCategory />} /> */}
         <Route exact path="/product-detail/:id" element={<ProductDetail />} />
         <Route exact path="/wishlist" element={<WishList />} />
         <Route exact path="/cart" element={<Cart />} />

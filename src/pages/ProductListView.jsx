@@ -9,7 +9,7 @@ const ProductListView = () => {
         <div className="col-lg-3 col-md-5 ">
             <div className="product-image">
                 <a href="single-product.html">
-                    <img src="images/product/large-size/12.jpg" alt="Li's Product Image"/>
+                    <img src="/images/product/large-size/12.jpg" alt="Li's Product Image"/>
                 </a>
                 <span className="sticker">New</span>
             </div>

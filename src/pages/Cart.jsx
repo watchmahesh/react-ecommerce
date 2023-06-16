@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 import Layout from '../components/Layout'
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
-import { removeItem,incrementQuantity } from '../store/cartSlice';
+import { removeItem,incrementQuantity,decrementQuantity } from '../store/cartSlice';
 import 'react-toastify/dist/ReactToastify.css';
 import { TOAST_CONFIG } from '../contants/custom';
 import { toast } from 'react-toastify';
@@ -19,12 +19,17 @@ const Cart = () => {
                 id
             })
         );
-        toast.success('Product Removed From Whishlist', TOAST_CONFIG)
+        toast.success('Product Removed From Cart', TOAST_CONFIG)
     }
     const [quantity, setQuantity] = useState(1);
 
-    const handleDecrement = () => {
+    const handleDecrement = (id) => {
         if (quantity > 1) {
+            dispatch(
+                decrementQuantity({
+                    id
+                })
+            );
             setQuantity(quantity - 1);
         }
     };
@@ -42,8 +47,10 @@ const Cart = () => {
         cart.cart.forEach((item) => {
             totalPrice += item.price * item.quantity;
         });
+        totalPrice = totalPrice.toFixed(2);
         return { totalPrice };
     };
+    
     const { totalPrice } = getTotal();
 
     return (
@@ -87,7 +94,7 @@ const Cart = () => {
                                                     <td className="quantity">
                                                         <label>Quantity</label>
                                                         <div className="cart-plus-minus">
-                                                            <input className="cart-plus-minus-box" value={quantity} type="text" />
+                                                            <input className="cart-plus-minus-box" value={item.quantity} type="text" />
                                                             <div className="dec qtybutton" onClick={()=>handleDecrement(item.id)}>
                                                                 <i className="fa fa-angle-down"></i>
                                                             </div>
@@ -96,7 +103,7 @@ const Cart = () => {
                                                             </div>
                                                         </div>
                                                     </td>
-                                                    <td className="li-product-price"><span className="amount">$ {totalPrice}</span></td>
+                                                    <td className="li-product-price"><span className="amount">$ {item.price * item.quantity}</span></td>
                                                 </tr>
                                             ))}
 

@@ -15,13 +15,13 @@ const ProductGridView = () => {
 
     const dispatch = useDispatch()
     const [product, setProduct] = useState([])
-    useEffect(() => {
-        const fetchData = async () => {
-            const response = await fetch('https://fakestoreapi.com/products');
-            setProduct(await response.json())
-        }
-        fetchData()
-    }, [])
+    // useEffect(() => {
+    //     const fetchData = async () => {
+    //         const response = await fetch('https://fakestoreapi.com/products');
+    //         setProduct(await response.json())
+    //     }
+    //     fetchData()
+    // }, [])
     const handleWishList = (item) => {
         dispatch(
             addToWishList({
@@ -45,22 +45,22 @@ const ProductGridView = () => {
         toast.success('Product added to cart', TOAST_CONFIG);
     };
 
-    // useEffect(() => {
-    //     const fetchData = async () => {
-    //         const response = await fetch(`https://fakestoreapi.com/products/category/${category}`);
-    //         const data = await response.json();
-    //         setProduct(data);
-    //     };
+    useEffect(() => {
+        const fetchData = async () => {
+            const response = await fetch(`https://fakestoreapi.com/products/category/${category}`);
+            const data = await response.json();
+            setProduct(data);
+        };
 
-    //     fetchData();
-    // }, [category]);
+        fetchData();
+    }, [category]);
     return (
         <>
             {product ? product.map((item) => (
                 <div className="col-lg-3 col-md-4 col-sm-6 mt-40" key={item.id}>
                     <div className="single-product-wrap">
                         <div className="product-image">
-                            <Link to="/product-detail">
+                            <Link to={`/product-detail/${item.id}`}>
                                 <img src={item.image} alt="Li's Product Image" style={{ width: '100px', height: '100px' }} />
                             </Link>
                             <span className="sticker">New</span>

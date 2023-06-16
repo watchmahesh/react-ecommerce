@@ -26,7 +26,7 @@ const ProductByCategory = () => {
                         <div className="col-lg-12">
                             <div className="single-banner shop-page-banner">
                                 <a href="#">
-                                    <img src="images/bg-banner/2.jpg" alt="Li's Static Banner"/>
+                                    <img src="/images/bg-banner/2.jpg" alt="Li's Static Banner"/>
                                 </a>
                             </div>
                             <div className="shop-top-bar mt-30">

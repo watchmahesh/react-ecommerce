@@ -61,7 +61,7 @@ const ProductDetail = () => {
                             <div className="product-details-left">
                                 <div className="product-details-images slider-navigation-1">
                                     <div className="lg-image">
-                                        <img src={product.image} alt="product image" />
+                                        <img src={product.image} alt="product image" style={{ width: '300px', height: '500px' }} />
                                     </div>
                                     {/* <div className="lg-image">
                                         <img src="images/product/large-size/2.jpg" alt="product image"/>

@@ -13,7 +13,7 @@ const Footer = () => {
                                 <div className="col-lg-3 col-md-6 col-sm-6 pb-sm-55 pb-xs-55">
                                     <div className="li-shipping-inner-box">
                                         <div className="shipping-icon">
-                                            <img src="images/shipping-icon/1.png" alt="Shipping Icon" />
+                                            <img src="/images/shipping-icon/1.png" alt="Shipping Icon" />
                                         </div>
                                         <div className="shipping-text">
                                             <h2>Free Delivery</h2>
@@ -25,7 +25,7 @@ const Footer = () => {
                                 <div className="col-lg-3 col-md-6 col-sm-6 pb-sm-55 pb-xs-55">
                                     <div className="li-shipping-inner-box">
                                         <div className="shipping-icon">
-                                            <img src="images/shipping-icon/2.png" alt="Shipping Icon" />
+                                            <img src="/images/shipping-icon/2.png" alt="Shipping Icon" />
                                         </div>
                                         <div className="shipping-text">
                                             <h2>Safe Payment</h2>
@@ -37,7 +37,7 @@ const Footer = () => {
                                 <div className="col-lg-3 col-md-6 col-sm-6 pb-xs-30">
                                     <div className="li-shipping-inner-box">
                                         <div className="shipping-icon">
-                                            <img src="images/shipping-icon/3.png" alt="Shipping Icon" />
+                                            <img src="/images/shipping-icon/3.png" alt="Shipping Icon" />
                                         </div>
                                         <div className="shipping-text">
                                             <h2>Shop with Confidence</h2>
@@ -49,7 +49,7 @@ const Footer = () => {
                                 <div className="col-lg-3 col-md-6 col-sm-6 pb-xs-30">
                                     <div className="li-shipping-inner-box">
                                         <div className="shipping-icon">
-                                            <img src="images/shipping-icon/4.png" alt="Shipping Icon" />
+                                            <img src="/images/shipping-icon/4.png" alt="Shipping Icon" />
                                         </div>
                                         <div className="shipping-text">
                                             <h2>24/7 Help Center</h2>
@@ -68,7 +68,7 @@ const Footer = () => {
                             <div className="row">
                                 <div className="col-lg-4 col-md-6">
                                     <div className="footer-logo">
-                                        <img src="images/menu/logo/1.jpg" alt="Footer Logo" />
+                                        <img src="/images/menu/logo/1.jpg" alt="Footer Logo" />
                                         <p className="info">
                                             We are a team of designers and developers that create high quality HTML Template & Woocommerce, Shopify Theme.
                                         </p>

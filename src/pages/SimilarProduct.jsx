@@ -1,8 +1,36 @@
 /* eslint-disable jsx-a11y/img-redundant-alt */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react'
+import Slider from 'react-slick';
 
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 const SimilarProduct = () => {
+    const settings = {
+        dots: true,
+        infinite: true,
+        speed: 500,
+        slidesToShow: 3,
+        slidesToScroll: 1,
+        responsive: [
+          {
+            breakpoint: 1024,
+            settings: {
+              slidesToShow: 2,
+              slidesToScroll: 1,
+              infinite: true,
+              dots: true
+            }
+          },
+          {
+            breakpoint: 768,
+            settings: {
+              slidesToShow: 1,
+              slidesToScroll: 1
+            }
+          }
+        ]
+      };
   return (
     <section className="product-area li-laptop-product pt-30 pb-50">
     <div className="container">
@@ -14,6 +42,8 @@ const SimilarProduct = () => {
                     </h2>
                 </div>
                 <div className="row">
+                <Slider {...settings}>
+
                     <div className="product-active owl-carousel">
                         <div className="col-lg-12">
                             <div className="single-product-wrap">
@@ -256,6 +286,8 @@ const SimilarProduct = () => {
                             </div>
                         </div>
                     </div>
+                    </Slider>
+
                 </div>
             </div>
         </div>

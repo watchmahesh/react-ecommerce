@@ -13,15 +13,14 @@ const TotalComponent = () => {
       totalQuantity += item.quantity;
       totalPrice += item.price * item.quantity;
     });
-    console.log(totalPrice)
     return { totalPrice, totalQuantity };
   };
 
   const { totalPrice, totalQuantity } = getTotal();
 
   return <div>
-          <Cart totalPrice={totalPrice} totalQuantity={totalQuantity} />
-          <Header totalPrice={totalPrice} totalQuantity={totalQuantity} />
+          {/* <Cart totalPrice={totalPrice} totalQuantity={totalQuantity} />
+          <Header totalPrice={totalPrice} totalQuantity={totalQuantity} /> */}
 
   </div>;
 };

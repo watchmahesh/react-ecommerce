@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux';
 
 const Header = () => {
+    
     const [category, setCategory] = useState([])
     useEffect(() => {
         const fetchData = async () => {
@@ -28,6 +29,7 @@ const Header = () => {
             totalQuantity += item.quantity;
             totalPrice += item.price * item.quantity;
         });
+        totalPrice = totalPrice.toFixed(2);
         return { totalPrice, totalQuantity };
     };
     const { totalPrice, totalQuantity } = getTotal();
@@ -88,7 +90,7 @@ const Header = () => {
                             <div className="col-lg-3">
                                 <div className="logo pb-sm-30 pb-xs-30">
                                     <Link to="/">
-                                        <img src="images/menu/logo/1.jpg" alt="" />
+                                        <img src="/images/menu/logo/1.jpg" alt="" />
                                     </Link>
                                 </div>
                             </div>
@@ -181,11 +183,11 @@ const Header = () => {
                                         <ul>
                                             <li><Link to="/">Home</Link></li>
 
-                                            {/* {category ?.map((item)=>(
+                                            {category ?.map((item)=>(
                                             <li><Link to={`/product-category/${item}`}>{item}</Link></li>
-                                           ))} */}
-                                            <li><Link to="/product-category">Accessories</Link></li>
-                                            <li><Link to="/wishlist">Wishlist</Link></li>
+                                           ))}
+                                            {/* <li><Link to="/product-category">Accessories</Link></li> */}
+                                            {/* <li><Link to="/wishlist">Wishlist</Link></li> */}
                                             <li><Link to="/login">Login</Link></li>
                                             <li><Link to="/logout">Logout</Link></li>
                                         </ul>
