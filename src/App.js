@@ -12,6 +12,7 @@ import Logout from "./pages/Logout";
 import ProductByCategory from "./pages/ProductByCategory";
 import Cart from "./pages/Cart";
 import ProductDetail from "./pages/ProductDetail";
+import { ProceedCart } from "./pages/ProceedCart";
 
 function App() {
   const [isSignedIn, setIsSignedIn] = useState(isLoggedIn());
@@ -36,6 +37,10 @@ function App() {
             <Route
               path='/logout'
               element={<Logout onLogout={() => setIsSignedIn(false)} />}
+            />
+            <Route
+              path='/proceed-checkout'
+              element={<ProceedCart onLogout={() => setIsSignedIn(false)} />}
             />
 
           </>

@@ -99,7 +99,10 @@ const Header = () => {
                                 <form action="#" className="hm-searchbox">
                                     <select className="nice-select select-search-category">
                                         <option value="0">All</option>
-                                        <option value="10">Laptops</option>
+                                        {category?.map((item)=>(
+
+                                        <option value={item}>{item}</option>
+                                        ))}
 
                                     </select>
                                     <input type="text" placeholder="Enter your search key ..." />
@@ -186,8 +189,7 @@ const Header = () => {
                                             {category ?.map((item)=>(
                                             <li><Link to={`/product-category/${item}`}>{item}</Link></li>
                                            ))}
-                                            {/* <li><Link to="/product-category">Accessories</Link></li> */}
-                                            {/* <li><Link to="/wishlist">Wishlist</Link></li> */}
+                            
                                             <li><Link to="/login">Login</Link></li>
                                             <li><Link to="/logout">Logout</Link></li>
                                         </ul>

@@ -50,7 +50,6 @@ const Cart = () => {
         totalPrice = totalPrice.toFixed(2);
         return { totalPrice };
     };
-    
     const { totalPrice } = getTotal();
 
     return (
@@ -103,7 +102,7 @@ const Cart = () => {
                                                             </div>
                                                         </div>
                                                     </td>
-                                                    <td className="li-product-price"><span className="amount">$ {item.price * item.quantity}</span></td>
+                                                    <td className="li-product-price"><span className="amount">$ {(item.price * item.quantity).toFixed(2)}</span></td>
                                                 </tr>
                                             ))}
 
@@ -111,7 +110,7 @@ const Cart = () => {
                                         </tbody>
                                     </table>
                                 </div>
-                                <div className="row">
+                                {/* <div className="row">
                                     <div className="col-12">
                                         <div className="coupon-all">
                                             <div className="coupon">
@@ -123,7 +122,7 @@ const Cart = () => {
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div> */}
                                 <div className="row">
                                     <div className="col-md-5 ml-auto">
                                         <div className="cart-page-total">
@@ -132,7 +131,7 @@ const Cart = () => {
                                                 <li>Subtotal <span>{totalPrice}</span></li>
                                                 <li>Total <span>{totalPrice}</span></li>
                                             </ul>
-                                            <a href="#">Proceed to checkout</a>
+                                            <Link to ="/proceed-checkout">Proceed to checkout</Link>
                                         </div>
                                     </div>
                                 </div>

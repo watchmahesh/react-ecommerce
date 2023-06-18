@@ -30,17 +30,15 @@ const ProductDetail = () => {
     }
     const handleAddToCart = (item) => {
         dispatch(
-          addToCart({
-            id: item.id,
-            title: item.title,
-            image: item.image,
-            price: item.price
-          })
+            addToCart({
+                id: item.id,
+                title: item.title,
+                image: item.image,
+                price: item.price
+            })
         );
-      
         toast.success('Product added to cart', TOAST_CONFIG);
-      };
-   
+    };
     return (
         <Layout>
             <div className="breadcrumb-area">
@@ -117,14 +115,6 @@ const ProductDetail = () => {
                                         </form>
                                     </div>
                                     <div className="product-additional-info">
-                                        <div className="product-social-sharing">
-                                            <ul>
-                                                <li className="facebook"><a href="#"><i className="fa fa-facebook"></i>Facebook</a></li>
-                                                <li className="twitter"><a href="#"><i className="fa fa-twitter"></i>Twitter</a></li>
-                                                <li className="google-plus"><a href="#"><i className="fa fa-google-plus"></i>Google +</a></li>
-                                                <li className="instagram"><a href="#"><i className="fa fa-instagram"></i>Instagram</a></li>
-                                            </ul>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
